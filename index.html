@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FFBazar - Free Fire Diamond Topup</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: #f5f5f5; padding-bottom: 70px; }
+.header { background: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+.logo { font-size: 24px; font-weight: bold; color: #6a0dad; }
+.header-right { display: flex; align-items: center; gap: 10px; }
+.support-btn { background: #25D366; color: white; border: none; padding: 6px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+.wallet { background: #6a0dad; color: white; padding: 6px 12px; border-radius: 20px; font-size: 14px; font-weight: 600; }
+.notice { background: #6a0dad; color: white; padding: 10px 16px; font-size: 12px; text-align: center; line-height: 1.4; }
+.banner-slider { margin: 12px 16px; border-radius: 12px; overflow: hidden; cursor: pointer; }
+.banner-slider img { width: 100%; display: block; }
+.section { padding: 16px; }
+.section-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; text-align: center; color: #333; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.card { background: white; border-radius: 12px; padding: 8px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.08); cursor: pointer; }
+.card:active { transform: scale(0.95); }
+.card-img { width: 100%; height: 90px; border-radius: 8px; overflow: hidden; margin-bottom: 6px; background: #f0f0f0; }
+.card-img img { width: 100%; height: 100%; object-fit: cover; }
+.card-title { font-size: 11px; font-weight: 600; line-height: 1.3; color: #333; }
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: white; display: flex; justify-content: space-around; padding: 8px 0; box-shadow: 0 -2px 8px rgba(0,0,0,0.1); }
+.nav-item { text-align: center; font-size: 10px; color: #666; cursor: pointer; }
+.nav-item.active { color: #6a0dad; }
+.order-page { display: none; }
+.back-btn { background: #6a0dad; color: white; border: none; padding: 8px 16px; border-radius: 8px; margin: 16px; cursor: pointer; }
+.product-box { background: white; margin: 12px 16px; padding: 16px; border-radius: 12px; display: flex; gap: 12px; align-items: center; }
+.product-img { width: 60px; height: 60px; border-radius: 8px; overflow: hidden; background: #f0f0f0; }
+.product-img img { width: 100%; height: 100%; object-fit: cover; }
+.step-box { background: white; margin: 12px 16px; padding: 16px; border-radius: 12px; }
+.step-title { font-size: 16px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.step-num { background: #6a0dad; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.package-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.package { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 16px; text-align: center; cursor: pointer; }
+.package.selected { border-color: #6a0dad; background: #f3e5f5; }
+.package-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; color: #333; }
+.package-price { color: #6a0dad; font-weight: 700; font-size: 15px; }
+.uid-input { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; margin: 8px 0; font-size: 14px; }
+.check-btn { width: 100%; background: #6a0dad; color: white; border: none; padding: 12px; border-radius: 8px; font-size: 14px; font-weight: 600; margin-top: 8px; cursor: pointer; }
+.payment-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 12px 0; }
+.payment { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 12px; text-align: center; cursor: pointer; position: relative; }
+.payment.selected { border-color: #6a0dad; background: #f3e5f5; }
+.payment.selected::before { content: '✓'; position: absolute; top: -8px; left: -8px; background: #dc3545; color: white; width: 20px; height: 20px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; z-index: 10; }
+.payment-wallet { padding: 8px; }
+.payment-wallet img { width: 100%; height: 80px; object-fit: contain; }
+.payment-instant { padding: 8px; }
+.instant-logos { display: flex; justify-content: center; gap: 6px; margin-bottom: 8px; }
+.instant-logos img { width: 30px; height: 30px; object-fit: contain; border: 1px solid #e0e0e0; border-radius: 4px; padding: 2px; }
+.payment-label { font-size: 12px; font-weight: 600; color: #666; margin-top: 4px; }
+.order-btn { width: calc(100% - 32px); background: #6a0dad; color: white; border: none; padding: 14px; border-radius: 10px; font-size: 16px; font-weight: 600; margin: 16px; cursor: pointer; }
+.home-page { display: block; }
+.payment-info { background: #fff3cd; padding: 12px; border-radius: 8px; font-size: 13px; margin: 12px 0; border-left: 4px solid #ffc107; display: none; }
+.help-link { color: #6a0dad; font-size: 13px; text-align: center; padding: 8px; cursor: pointer; }
+.support-banner { background: #25D366; color: white; margin: 12px 16px; padding: 12px; border-radius: 10px; text-align: center; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    </style>
+</head>
+<body>
+    <div class="home-page" id="homePage">
+        <div class="header">
+            <div class="logo">🔥 FFBazar</div>
+            <div class="header-right">
+                <button class="support-btn" onclick="openWhatsApp()">💬 Support</button>
+                <div class="wallet">💰 2৳</div>
+            </div>
+        </div>
+
+        <div class="notice">
+            ১৮ বছরের নিচে কেউ অর্ডার করবেন না। বাবা/মা বা ফ্যামিলির টাকা চুরি করে অর্ডার করলে তার বিরুদ্ধে আইনগত ব্যাবস্থা নেওয়া হবে।
+        </div>
+
+        <div class="banner-slider" onclick="openOrder('Weekly/Monthly Offer', 'banner1.jpg')">
+            <img src="banner1.jpg" alt="Banner">
+        </div>
+
+        <div class="support-banner" onclick="openWhatsApp()">
+            💬 যেকোনো সমস্যায় WhatsApp এ মেসেজ করুন: 01873786543
+        </div>
+
+        <div class="section">
+            <div class="section-title">SPECIAL OFFER</div>
+            <div class="grid">
+                <div class="card" onclick="openOrder('Special Offer', 'special-offer.jpg')">
+                    <div class="card-img"><img src="special-offer.jpg" alt="Special Offer"></div>
+                    <div class="card-title">SPECIAL OFFER</div>
+                </div>
+                <div class="card" onclick="openOrder('Weekly Lite (BD Server)', 'weekly-lite.jpg')">
+                    <div class="card-img"><img src="weekly-lite.jpg" alt="Weekly Lite"></div>
+                    <div class="card-title">Weekly Lite (BD<br>Server)</div>
+                </div>
+                <div class="card" onclick="openOrder('E-Badge/Evo Access (BD)', 'e-badge.jpg')">
+                    <div class="card-img"><img src="e-badge.jpg" alt="E-Badge"></div>
+                    <div class="card-title">E-Badge/Evo Access<br>(BD)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">FREE FIRE</div>
+            <div class="grid">
+                <div class="card" onclick="openOrder('UID TOPUP (BD)', 'uid-topup.jpg')">
+                    <div class="card-img"><img src="uid-topup.jpg" alt="UID TOPUP"></div>
+                    <div class="card-title">UID TOPUP (BD)</div>
+                </div>
+                <div class="card" onclick="openOrder('LEVEL UP PASS', 'levelup-pass.jpg')">
+                    <div class="card-img"><img src="levelup-pass.jpg" alt="LEVEL UP PASS"></div>
+                    <div class="card-title">LEVEL UP PASS</div>
+                </div>
+                <div class="card" onclick="openOrder('Indonesia Server', 'indonesia-server.jpg')">
+                    <div class="card-img"><img src="indonesia-server.jpg" alt="Indonesia Server"></div>
+                    <div class="card-title">Indonesia Server</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="order-page" id="orderPage">
+        <button class="back-btn" onclick="goHome()">← Back</button>
+        <div class="product-box">
+            <div class="product-img" id="orderImg"></div>
+            <div>
+                <div style="font-weight: 600; font-size: 16px;" id="orderTitle">Weekly/Monthly Offer</div>
+                <div style="color: #666; font-size: 13px;">Game / Top up</div>
+            </div>
+        </div>
+
+        <div class="step-box">
+            <div class="step-title"><span class="step-num">1</span> Select Recharge</div>
+            <div class="package-grid" id="packageList"></div>
+            <div class="help-link" onclick="openWhatsApp()">🔗 কিভাবে অর্ডার করবেন? WhatsApp এ জানুন</div>
+        </div>
+
+        <div class="step-box">
+            <div class="step-title"><span class="step-num">2</span> Account Info</div>
+            <div style="font-size: 13px; color: #666; margin-bottom: 8px;">গেমের আইডি কোড দিন</div>
+            <input type="text" class="uid-input" id="uidInput" placeholder="গেমের আইডি কোড দিন">
+            <button class="check-btn">আপনার গেম আইডির নাম চেক করুন</button>
+        </div>
+
+        <div class="step-box">
+            <div class="step-title"><span class="step-num">3</span> Select one option</div>
+            <div class="payment-grid">
+                <div class="payment" onclick="selectPayment('Wallet')">
+                    <div class="payment-wallet">
+                        <img src="wallet-pay.png" alt="Wallet Pay">
+                    </div>
+                    <div class="payment-label">Wallet Pay</div>
+                </div>
+                <div class="payment" onclick="selectPayment('Instant')">
+                    <div class="payment-instant">
+                        <div class="instant-logos">
+                            <img src="bkash.png" alt="bKash">
+                            <img src="nagad.png" alt="Nagad">
+                            <img src="rocket.png" alt="Rocket">
+                        </div>
+                        <div style="font-weight: 600; color: #6a0dad; font-size: 13px;">Auto Payment</div>
+                    </div>
+                    <div class="payment-label">Instant Pay</div>
+                </div>
+            </div>
+            <div class="payment-info" id="paymentInfo">
+                <strong>Payment Number:</strong> 01873786543<br>
+                <strong>Type:</strong> Send Money<br>
+                <strong>Note:</strong> টাকা পাঠিয়ে TrxID টা WhatsApp এ দিবেন
+            </div>
+        </div>
+
+        <button class="order-btn" onclick="placeOrder()">Order Now</button>
+    </div>
+
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="goHome()">🏠<br>Home</div>
+        <div class="nav-item">➕<br>Add Money</div>
+        <div class="nav-item">📑<br>My Orders</div>
+        <div class="nav-item">🎁<br>My Codes</div>
+        <div class="nav-item" onclick="openWhatsApp()">💬<br>Support</div>
+    </div>
+
+    <script>
+        const packages = {
+            'Weekly Lite (BD Server)': [
+                {name: 'WEEKLY LITE', price: 40},
+                {name: '2X WEEKLY LITE', price: 80}
+            ],
+            'E-Badge/Evo Access (BD)': [
+                {name: 'EVO ACCESS', price: 65},
+                {name: 'E-BADGE', price: 100}
+            ],
+            'LEVEL UP PASS': [
+                {name: 'LEVEL UP PASS', price: 170}
+            ],
+            'Indonesia Server': [
+                {name: 'INDO 86 Diamond', price: 115},
+                {name: 'INDO 172 Diamond', price: 230}
+            ],
+            'UID TOPUP (BD)': [
+                {name: 'WEEKLY', price: 154},
+                {name: 'MONTHLY', price: 765},
+                {name: '25 Diamond', price: 24},
+                {name: '50 Diamond', price: 38},
+                {name: '115 Diamond', price: 79},
+                {name: '240 Diamond', price: 158},
+                {name: '5060 Diamond', price: 3190},
+                {name: '10120 Diamond', price: 6350}
+            ],
+            'Special Offer': [
+                {name: 'Special Pack 1', price: 99},
+                {name: 'Special Pack 2', price: 199}
+            ],
+            'default': [
+                {name: 'Package 1', price: 100},
+                {name: 'Package 2', price: 200}
+            ]
+        };
+
+        let selectedPackage = null;
+        let selectedPayment = null;
+        let currentProduct = '';
+
+        function openWhatsApp() {
+            window.open('https://wa.me/8801873786543?text=Hello%20FFBazar%20Support', '_blank');
+        }
+
+        function openOrder(title, imgSrc) {
+            document.getElementById('homePage').style.display = 'none';
+            document.getElementById('orderPage').style.display = 'block';
+            document.getElementById('orderTitle').innerText = title;
+            document.getElementById('orderImg').innerHTML = `<img src="${imgSrc}" alt="${title}">`;
+            currentProduct = title;
+            const pkgList = packages[title] || packages['default'];
+            let html = '';
+            pkgList.forEach((pkg, i) => {
+                html += `<div class="package" onclick="selectPackage(${i}, '${pkg.name}', ${pkg.price})">
+                    <div class="package-name">${pkg.name}</div>
+                    <div class="package-price">BDT ${pkg.price}</div>
+                </div>`;
+            });
+            document.getElementById('packageList').innerHTML = html;
+            window.scrollTo(0,0);
+        }
+
+        function selectPackage(index, name, price) {
+            document.querySelectorAll('.package').forEach(p => p.classList.remove('selected'));
+            document.querySelectorAll('.package')[index].classList.add('selected');
+            selectedPackage = {name, price};
+        }
+
+        function selectPayment(method) {
+            document.querySelectorAll('.payment').forEach(p => p.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            selectedPayment = method;
+            document.getElementById('paymentInfo').style.display = 'block';
+        }
+
+        function goHome() {
+            document.getElementById('homePage').style.display = 'block';
+            document.getElementById('orderPage').style.display = 'none';
+            selectedPackage = null;
+            selectedPayment = null;
+            document.getElementById('uidInput').value = '';
+            document.getElementById('paymentInfo').style.display = 'none';
+            document.querySelectorAll('.payment').forEach(p => p.classList.remove('selected'));
+            document.querySelectorAll('.package').forEach(p => p.classList.remove('selected'));
+        }
+
+        function placeOrder() {
+            const uid = document.getElementById('uidInput').value;
+            if (!selectedPackage) { alert('প্যাকেজ সিলেক্ট করুন'); return; }
+            if (!uid) { alert('UID দিন'); return; }
+            if (!selectedPayment) { alert('Payment method সিলেক্ট করুন'); return; }
+            const msg = `*FFBazar Order*%0A%0AProduct: ${currentProduct}%0APackage: ${selectedPackage.name}%0APrice: ${selectedPackage.price} BDT%0AUID: ${uid}%0APayment: ${selectedPayment} (01873786543)%0A%0APayment করে TrxID দিন প্লিজ`;
+            window.open(`https://wa.me/8801873786543?text=${msg}`, '_blank');
+        }
+    </script>
+</body>
+  </html>
