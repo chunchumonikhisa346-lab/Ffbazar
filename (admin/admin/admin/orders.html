@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orders - FF Bazar Admin</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f5f7fb;
+}
+
+header{
+background:#0066ff;
+color:#fff;
+padding:18px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+width:95%;
+max-width:900px;
+margin:20px auto;
+}
+
+table{
+width:100%;
+background:#fff;
+border-collapse:collapse;
+box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+
+th{
+background:#0066ff;
+color:#fff;
+padding:12px;
+}
+
+td{
+padding:12px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+
+button{
+padding:8px 15px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+color:#fff;
+}
+
+.approve{
+background:#28a745;
+}
+
+.reject{
+background:#dc3545;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+Order Management
+</header>
+
+<div class="container">
+
+<table>
+
+<tr>
+<th>Order ID</th>
+<th>User</th>
+<th>Product</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td>#1001</td>
+<td>Eshan</td>
+<td>Weekly</td>
+<td>170৳</td>
+<td>Pending</td>
+<td>
+<button class="approve">Approve</button>
+<button class="reject">Reject</button>
+</td>
+</tr>
+
+<tr>
+<td>#1002</td>
+<td>Player01</td>
+<td>100 Diamond</td>
+<td>85৳</td>
+<td>Completed</td>
+<td>
+<button class="approve">Approve</button>
+<button class="reject">Reject</button>
+</td>
+</tr>
+
+</table>
+
+</div>
+
+</body>
+</html>
