@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Top Up - FF Bazar</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6fb;
+}
+
+header{
+background:#0066ff;
+color:#fff;
+padding:18px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+max-width:500px;
+margin:20px auto;
+padding:15px;
+}
+
+.card{
+background:#fff;
+border-radius:12px;
+padding:15px;
+margin-bottom:15px;
+box-shadow:0 2px 8px rgba(0,0,0,.1);
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.card img{
+width:60px;
+height:60px;
+border-radius:10px;
+}
+
+.info{
+flex:1;
+margin-left:15px;
+}
+
+.info h3{
+margin-bottom:5px;
+}
+
+.price{
+color:#0066ff;
+font-weight:bold;
+}
+
+button{
+background:#0066ff;
+color:#fff;
+border:none;
+padding:10px 18px;
+border-radius:8px;
+cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+Free Fire Top Up
+</header>
+
+<div class="container">
+
+<div class="card">
+<img src="images/weekly.png">
+
+<div class="info">
+<h3>Weekly Membership</h3>
+<p class="price">৳170</p>
+</div>
+
+<button onclick="buy('Weekly Membership',170)">
+Buy
+</button>
+
+</div>
+
+<div class="card">
+<img src="images/monthly.png">
+
+<div class="info">
+<h3>Monthly Membership</h3>
+<p class="price">৳760</p>
+</div>
+
+<button onclick="buy('Monthly Membership',760)">
+Buy
+</button>
+
+</div>
+
+<div class="card">
+<img src="images/diamond.png">
+
+<div class="info">
+<h3>100 Diamond</h3>
+<p class="price">৳85</p>
+</div>
+
+<button onclick="buy('100 Diamond',85)">
+Buy
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function buy(name,price){
+
+localStorage.setItem("product",name);
+
+localStorage.setItem("price",price);
+
+window.location="order.html";
+
+}
+
+</script>
+
+</body>
+  </html>
