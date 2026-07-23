@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Settings</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6fb;
+}
+
+header{
+background:#0066ff;
+color:#fff;
+padding:18px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+max-width:700px;
+margin:20px auto;
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin-top:8px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:20px;
+background:#0066ff;
+color:#fff;
+border:none;
+border-radius:8px;
+font-size:17px;
+cursor:pointer;
+}
+
+.success{
+display:none;
+margin-top:15px;
+padding:10px;
+background:#d4edda;
+color:#155724;
+text-align:center;
+border-radius:8px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+Payment Settings
+</header>
+
+<div class="container">
+
+<label>bKash Number</label>
+<input type="text" id="bkash" value="01873786543">
+
+<label>Nagad Number</label>
+<input type="text" id="nagad" value="01873786543">
+
+<label>Rocket Number</label>
+<input type="text" id="rocket" placeholder="Rocket Number">
+
+<label>Payment Type</label>
+<select id="type">
+<option>Personal</option>
+<option>Agent</option>
+<option>Merchant</option>
+</select>
+
+<button onclick="savePayment()">
+Save Payment Settings
+</button>
+
+<div class="success" id="success">
+Payment Settings Saved Successfully
+</div>
+
+</div>
+
+<script>
+function savePayment(){
+
+localStorage.setItem("bkash",document.getElementById("bkash").value);
+localStorage.setItem("nagad",document.getElementById("nagad").value);
+localStorage.setItem("rocket",document.getElementById("rocket").value);
+localStorage.setItem("paymentType",document.getElementById("type").value);
+
+document.getElementById("success").style.display="block";
+
+setTimeout(()=>{
+document.getElementById("success").style.display="none";
+},2000);
+
+}
+</script>
+
+</body>
+</html>
