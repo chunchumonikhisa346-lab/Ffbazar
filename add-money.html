@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Money - FF Bazar</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6fb;
+}
+
+.header{
+background:#0b57d0;
+color:#fff;
+padding:18px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+max-width:420px;
+margin:20px auto;
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 0 10px rgba(0,0,0,.1);
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-top:15px;
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin-top:8px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:20px;
+background:#0b57d0;
+color:#fff;
+border:none;
+border-radius:8px;
+font-size:17px;
+cursor:pointer;
+}
+
+.payment{
+margin-top:20px;
+background:#eef4ff;
+padding:15px;
+border-radius:10px;
+line-height:30px;
+}
+
+.note{
+margin-top:15px;
+color:red;
+font-size:14px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+Add Money
+</div>
+
+<div class="container">
+
+<h2>Deposit Balance</h2>
+
+<label>Payment Method</label>
+<select>
+<option>bKash</option>
+<option>Nagad</option>
+<option>Rocket</option>
+</select>
+
+<label>Amount (৳)</label>
+<input type="number" placeholder="Enter Amount">
+
+<label>Transaction ID</label>
+<input type="text" placeholder="Transaction ID">
+
+<label>Your Number</label>
+<input type="text" placeholder="01XXXXXXXXX">
+
+<div class="payment">
+<b>bKash Personal:</b><br>
+017XXXXXXXX<br><br>
+
+<b>Nagad Personal:</b><br>
+018XXXXXXXX
+</div>
+
+<p class="note">
+টাকা পাঠানোর পর Transaction ID দিয়ে Submit করুন।
+</p>
+
+<button>Submit</button>
+
+</div>
+
+</body>
+                 </html>
