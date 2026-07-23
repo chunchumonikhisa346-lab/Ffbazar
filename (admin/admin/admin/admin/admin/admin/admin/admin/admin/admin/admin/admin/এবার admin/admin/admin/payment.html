@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment - FF Bazar</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+body{background:#f4f6fb;}
+
+header{
+background:#0066ff;
+color:#fff;
+padding:16px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+max-width:450px;
+margin:20px auto;
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.box{
+background:#eef5ff;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:10px;
+background:#0066ff;
+color:#fff;
+border:none;
+border-radius:8px;
+font-size:17px;
+cursor:pointer;
+}
+
+.add{
+background:#28a745;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>Payment</header>
+
+<div class="container">
+
+<div class="box">
+<h3>Product</h3>
+<p id="product"></p>
+</div>
+
+<div class="box">
+<h3>Price</h3>
+<p>৳ <span id="price"></span></p>
+</div>
+
+<div class="box">
+<h3>Your Balance</h3>
+<p>৳ <span id="balance">0</span></p>
+</div>
+
+<button onclick="payNow()">
+Pay Now
+</button>
+
+<button class="add" onclick="window.location='add-money.html'">
+Add Money
+</button>
+
+</div>
+
+<script>
+
+document.getElementById("product").innerHTML=
+localStorage.getItem("product");
+
+document.getElementById("price").innerHTML=
+localStorage.getItem("price");
+
+function payNow(){
+
+alert("Payment Successful!");
+
+window.location="success.html";
+
+}
+
+</script>
+
+</body>
+</html>
