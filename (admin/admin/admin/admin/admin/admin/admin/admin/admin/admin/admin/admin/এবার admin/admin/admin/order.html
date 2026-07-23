@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Place Order - FF Bazar</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+body{background:#f5f5f5;}
+
+header{
+background:#0066ff;
+color:#fff;
+padding:15px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+max-width:450px;
+margin:20px auto;
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+.info{
+background:#eef5ff;
+padding:15px;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+label{
+font-weight:bold;
+display:block;
+margin-top:12px;
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin-top:6px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:20px;
+background:#0066ff;
+color:#fff;
+border:none;
+border-radius:8px;
+font-size:17px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0050d4;
+}
+</style>
+
+</head>
+<body>
+
+<header>FF Bazar Order</header>
+
+<div class="container">
+
+<h2>Confirm Order</h2>
+
+<div class="info">
+<p><b>Product:</b> <span id="product"></span></p>
+<p><b>Price:</b> ৳<span id="price"></span></p>
+</div>
+
+<label>Free Fire UID</label>
+<input type="number" placeholder="Enter UID">
+
+<label>Player Name</label>
+<input type="text" placeholder="Player Name">
+
+<label>Server</label>
+<select>
+<option>Bangladesh</option>
+<option>Singapore</option>
+<option>India</option>
+<option>Middle East</option>
+</select>
+
+<button onclick="confirmOrder()">
+Confirm Order
+</button>
+
+</div>
+
+<script>
+document.getElementById("product").innerHTML =
+localStorage.getItem("product");
+
+document.getElementById("price").innerHTML =
+localStorage.getItem("price");
+
+function confirmOrder(){
+alert("Order Submitted Successfully!");
+window.location="success.html";
+}
+</script>
+
+</body>
+  </html>
