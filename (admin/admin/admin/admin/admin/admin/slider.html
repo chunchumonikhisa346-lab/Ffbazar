@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slider Management</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f6fb;
+}
+
+header{
+background:#0066ff;
+color:#fff;
+padding:18px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+width:95%;
+max-width:700px;
+margin:20px auto;
+background:#fff;
+padding:20px;
+border-radius:12px;
+box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:8px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:20px;
+background:#0066ff;
+color:#fff;
+border:none;
+border-radius:8px;
+font-size:17px;
+cursor:pointer;
+}
+
+.preview{
+margin-top:20px;
+padding:15px;
+background:#f8f8f8;
+border-radius:10px;
+text-align:center;
+}
+
+.preview img{
+width:100%;
+max-height:180px;
+object-fit:cover;
+border-radius:10px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+Slider Management
+</header>
+
+<div class="container">
+
+<label>Slider Image URL</label>
+<input type="text" placeholder="https://example.com/slider.jpg">
+
+<button>Upload Slider</button>
+
+<div class="preview">
+<h3>Current Slider</h3>
+<img src="../images/slider1.jpg" alt="Slider">
+</div>
+
+</div>
+
+</body>
+</html>
