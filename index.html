@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FF Arena</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:#000;color:#fff;min-height:100vh;padding-bottom:80px}
+.red{color:#ff0000}.hidden{display:none}
+.container{padding:20px;max-width:500px;margin:auto}
+.logo{width:100px;height:100px;border-radius:50%;margin:20px auto;border:3px solid #ff0000;box-shadow:0 0 20px #ff0000;display:block;object-fit:cover}
+h1{text-align:center;color:#ff0000;margin:10px 0;font-size:24px}
+.sub{text-align:center;color:#aaa;font-size:14px;margin-bottom:20px}
+.btn{background:#ff0000;border:none;color:#fff;padding:14px;border-radius:12px;width:100%;font-size:16px;font-weight:bold;cursor:pointer;margin-top:15px}
+.input-box{background:#111;border:1px solid #333;border-radius:12px;padding:14px;display:flex;align-items:center;margin-top:8px}
+.input-box input{background:transparent;border:none;outline:none;color:#fff;width:100%;margin-left:10px;font-size:15px}
+.alert{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#ff0000;padding:12px 20px;border-radius:8px;z-index:999;display:none}
+
+/* HOME */
+.top-bar{display:flex;justify-content:space-between;align-items:center;padding:15px}
+.user-info{display:flex;align-items:center;gap:10px}
+.user-avatar{width:50px;height:50px;border-radius:50%;border:2px solid #ff0000;object-fit:cover}
+.wallet{border:2px solid #ff0000;border-radius:20px;padding:6px 12px;font-size:14px}
+
+/* SLIDER */
+.slider{position:relative;width:95%;margin:15px auto;border-radius:15px;overflow:hidden}
+.slides{display:flex;transition:0.5s}
+.slide{width:100%;flex-shrink:0}
+.slide img{width:100%;border-radius:15px;display:block}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:8px}
+.dot{width:8px;height:8px;background:#444;border-radius:50%;transition:0.3s}
+.dot.active{width:25px;background:#ff0000}
+
+/* SECTION */
+.section-title{display:flex;align-items:center;margin:20px 15px 10px;font-weight:bold;font-size:18px}
+.section-title::before{content:'';width:4px;height:22px;background:#ff0000;margin-right:8px;border-radius:2px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 15px}
+.match-card-home{background:#111;border:2px solid #2a2a2a;border-radius:15px;overflow:hidden;cursor:pointer;transition:0.3s}
+.match-card-home:hover{border-color:#ff0000}
+.match-card-home img{width:100%;height:140px;object-fit:cover}
+.match-info-home{padding:10px;text-align:center}
+.live{color:#0f0;font-size:12px;display:flex;align-items:center;justify-content:center;gap:5px;margin-top:4px}
+.dot-live{width:6px;height:6px;background:#0f0;border-radius:50%;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* MATCH LIST PAGE */
+.match-list{padding:15px}
+.match-card{background:#0a0a0a;border:2px solid #ff0000;border-radius:15px;padding:15px;margin-bottom:15px;position:relative}
+.match-tag{position:absolute;top:0;right:0;background:#ff0000;padding:5px 10px;border-radius:0 13px 0 10px;font-size:12px;font-weight:bold}
+.match-header{display:flex;gap:10px;margin-bottom:10px}
+.match-logo{width:50px;height:50px;border-radius:10px}
+.match-title{font-size:14px;line-height:1.4}
+.match-date{font-size:12px;color:#0f0;margin-top:5px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+.info-box{background:#111;border:1px solid #222;border-radius:10px;padding:8px;text-align:center}
+.info-box small{color:#888;font-size:10px;display:block}
+.info-box b{font-size:14px}
+.progress-bar{background:#222;height:6px;border-radius:10px;margin:8px 0;overflow:hidden}
+.progress{height:100%;background:#ff0000;border-radius:10px}
+.reg-info{display:flex;justify-content:space-between;font-size:12px;color:#aaa;margin-bottom:8px}
+.join-btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:bold;font-size:16px;cursor:pointer}
+.join-btn.red{background:#ff0000;color:#fff}
+.join-btn.gray{background:#333;color:#888;cursor:not-allowed}
+.btn-group{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
+.btn-small{background:#ff0000;border:none;color:#fff;padding:10px;border-radius:8px;font-size:12px}
+.countdown{text-align:center;color:#0f0;font-size:14px;margin-top:8px}
+
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#111;display:flex;justify-content:space-around;padding:8px 0;border-top:2px solid #222}
+.nav-item{text-align:center;font-size:10px;color:#888;cursor:pointer}
+.nav-item.active{color:#ff0000}
+.nav-item.icon{font-size:22px;display:block;margin-bottom:2px}
+</style>
+</head>
+<body>
+<div id="alertBox" class="alert"></div>
+
+<!-- LOGIN -->
+<div id="loginPage" class="container">
+  <img src="https://i.ibb.co/k6XbQbC/logo.png" class="logo">
+  <h1>Welcome Back</h1><p class="sub">Sign in to continue</p>
+  <label>Email</label><div class="input-box">✉️<input type="email" id="loginEmail"></div>
+  <label style="margin-top:15px;display:block">Password</label><div class="input-box">🔒<input type="password" id="loginPassword"></div>
+  <button class="btn" onclick="login()">Login →</button>
+  <p style="text-align:center;margin-top:15px">No account? <a href="#" onclick="showSignup()" class="red">Sign Up</a></p>
+</div>
+
+<!-- SIGNUP -->
+<div id="signupPage" class="container hidden">
+  <img src="https://i.ibb.co/k6XbQbC/logo.png" class="logo">
+  <h1>Create account</h1><p class="sub">Start your journey</p>
+  <label>Username</label><div class="input-box">👤<input type="text" id="signupName"></div>
+  <label style="margin-top:15px;display:block">Email</label><div class="input-box">✉️<input type="email" id="signupEmail"></div>
+  <label style="margin-top:15px;display:block">Phone</label><div class="input-box"><span style="background:#ff0000;padding:4px 8px;border-radius:6px">+88</span><input type="tel" id="signupPhone"></div>
+  <label style="margin-top:15px;display:block">Password</label><div class="input-box">🔒<input type="password" id="signupPassword"></div>
+  <button class="btn" onclick="signup()">Create Account</button>
+  <p style="text-align:center;margin-top:15px"><a href="#" onclick="showLogin()" class="red">Already have account? Login</a></p>
+</div>
+
+<!-- HOME -->
+<div id="homePage" class="hidden">
+  <div class="top-bar">
+    <div class="user-info">
+      <img src="https://i.ibb.co/k6XbQbC/logo.png" class="user-avatar">
+      <div><div style="font-size:12px;color:#aaa">WELCOME BACK,</div><div><b>ZVY ID: #<span id="userFFID">182637</span></b></div></div>
+    </div>
+    <div class="wallet">💰 ৳ <span id="userBalance">0</span></div>
+  </div>
+
+  <div class="slider"><div class="slides" id="slides">
+    <div class="slide"><img src="https://i.ibb.co/5rZQYkP/banner1.jpg"></div>
+    <div class="slide"><img src="https://i.ibb.co/5rZQYkP/banner2.jpg"></div>
+    <div class="slide"><img src="https://i.ibb.co/5rZQYkP/banner3.jpg"></div>
+    <div class="slide"><img src="https://i.ibb.co/5rZQYkP/banner4.jpg"></div>
+  </div><div class="dots" id="dots"></div></div>
+
+  <div class="section-title">BR MATCH</div>
+  <div class="grid">
+    <div class="match-card-home" onclick="openMatchList('Solo')"><img src="https://i.ibb.co/3kV0YkP/brsolo.png"><div class="match-info-home"><b>BR Solo</b><div class="live"><span class="dot-live"></span> 46 Matches Live</div></div></div>
+    <div class="match-card-home" onclick="openMatchList('Duo')"><img src="https://i.ibb.co/3kV0YkP/brduo.png"><div class="match-info-home"><b>BR Duo</b><div class="live"><span class="dot-live"></span> 45 Matches Live</div></div></div>
+  </div>
+
+  <div class="section-title">SQUAD MATCHES</div>
+  <div class="grid">
+    <div class="match-card-home" onclick="openMatchList('Squad')"><img src="https://i.ibb.co/3kV0YkP/pro.png"><div class="match-info-home"><b>BR PRO League</b><div class="live"><span class="dot-live"></span> 45 Matches Live</div></div></div>
+    <div class="match-card-home" onclick="openMatchList('CS')"><img src="https://i.ibb.co/3kV0YkP/cs.png"><div class="match-info-home"><b>Clash Squad</b><div class="live"><span class="dot-live"></span> 15 Matches Live</div></div></div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="nav-item"><span class="icon">💎</span>Diamond</div>
+    <div class="nav-item"><span class="icon">📊</span>Results</div>
+    <div class="nav-item active"><span class="icon">🎮</span>Play</div>
+    <div class="nav-item"><span class="icon">🏆</span>My Matches</div>
+    <div class="nav-item" onclick="logout()"><span class="icon">👤</span>Profile</div>
+  </div>
+</div>
+
+<!-- MATCH LIST PAGE -->
+<div id="matchListPage" class="hidden">
+  <div style="display:flex;justify-content:space-between;padding:15px">
+    <button onclick="backToHome()" style="background:#222;border:none;color:#fff;padding:8px 15px;border-radius:10px">← Back</button>
+    <button style="background:#ff0000;border:none;color:#fff;padding:8px 15px;border-radius:10px">▶ Tutorial</button>
+  </div>
+  <div id="matchListContainer" class="match-list"></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDePqw20W8H6_YpTE1jxJ9MbPIshBb0Qy4",
+  authDomain: "ff-arena-5114e.firebaseapp.com",
+  projectId: "ff-arena-5114e",
+  storageBucket: "ff-arena-5114e.firebasestorage.app",
+  messagingSenderId: "436026075238",
+  appId: "1:436026075238:web:b16ea1fd59ad78b5bd65a7",
+  measurementId: "G-PJHXCEVMLR"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+function showAlert(msg){ alertBox.innerText = msg; alertBox.style.display = 'block'; setTimeout(()=>alertBox.style.display='none',3000); }
+window.showLogin = () => {loginPage.classList.remove('hidden');signupPage.classList.add('hidden')}
+window.showSignup = () => {signupPage.classList.remove('hidden');loginPage.classList.add('hidden')}
+
+window.signup = async () => {
+  const name = signupName.value; const email = signupEmail.value; const phone = signupPhone.value; const password = signupPassword.value;
+  if(name == "" || email == "" || password == "") return showAlert("সব ঘর Fill করো");
+  try{
+    const userCred = await createUserWithEmailAndPassword(auth, email, password);
+    await setDoc(doc(db, "users", userCred.user.uid), { name, email, phone, balance: 0, ffid: Math.floor(100000 + Math.random() * 900000) });
+    showAlert("Account Created!");
+  }catch(e){showAlert(e.message)}
+}
+window.login = async () => { try{ await signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value); }catch(e){showAlert(e.message)} }
+window.logout = async () => { await signOut(auth); showAlert("Logged out"); }
+
+onAuthStateChanged(auth, async (user) => {
+  if(user){
+    const docSnap = await getDoc(doc(db, "users", user.uid));
+    if(docSnap.exists()){ userFFID.innerText = docSnap.data().ffid; userBalance.innerText = docSnap.data().balance; }
+    homePage.classList.remove('hidden'); loginPage.classList.add('hidden'); signupPage.classList.add('hidden');
+  }else{ homePage.classList.add('hidden'); loginPage.classList.remove('hidden'); }
+});
+
+// DEMO MATCH DATA - EKHAN THEKE TUMI FIREBASE THEKE ANBA
+const demoMatches = [
+  {id:61519, mode:'Solo', name:'Solo Time | Normal', prize:800, fee:20, kill:10, map:'Bermuda', pov:'TPP', reg:47, total:48, time:'2026-07-31T22:00:00'},
+  {id:61520, mode:'Solo', name:'Solo Time | Normal', prize:800, fee:20, kill:10, map:'Bermuda', pov:'TPP', reg:48, total:48, time:'2026-07-31T22:30:00'},
+  {id:61521, mode:'Solo', name:'Solo Time | Normal', prize:800, fee:20, kill:10, map:'Bermuda', pov:'TPP', reg:48, total:48, time:'2026-07-31T23:00:00'},
+  {id:61522, mode:'Solo', name:'Solo Time | Normal', prize:800, fee:20, kill:10, map:'Bermuda', pov:'TPP', reg:30, total:48, time:'2026-07-31T23:30:00'},
+  {id:61826, mode:'Squad', name:'BR PRO League', prize:560, fee:15, kill:0, map:'Bermuda', pov:'TPP', reg:48, total:48, time:'2026-07-31T22:30:00'},
+  {id:61555, mode:'Duo', name:'Duo Time | Normal', prize:800, fee:20, kill:10, map:'Bermuda', pov:'TPP', reg:48, total:48, time:'2026-07-31T22:30:00'},
+];
+
+// CARD CLICK KORLE EI FUNCTION
+window.openMatchList = (mode) => {
+  homePage.classList.add('hidden');
+  matchListPage.classList.remove('hidden');
+  let html = '';
+  demoMatches.filter(m=>m.mode==mode).forEach(match=>{
+    const isFull = match.reg >= match.total;
+    const percent = (match.reg/match.total)*100;
+    const timeLeft = getTimeLeft(match.time);
+    html += `
+    <div class="match-card">
+      <div class="match-tag">#${match.id}</div>
+      <div class="match-header">
+        <img src="https://i.ibb.co/3kV0YkP/brsolo.png" class="match-logo">
+        <div>
+          <div class="match-title">${match.name} | 🚫ম্যাচ এ জয়েন করার আগে রুলস পরে নেন | 🚫রুলস ফলো না করলে রিওয়ার্ড দেয়া হবে না</div>
+          <div class="match-date">📅 ${new Date(match.time).toLocaleString('bn-BD')}</div>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="info-box"><small>PRIZE</small><b style="color:#ffb400">${match.prize} TK</b></div>
+        <div class="info-box"><small>TYPE</small><b>${match.mode}</b></div>
+        <div class="info-box"><small>FEE</small><b style="color:#0f0">${match.fee} TK</b></div>
+        <div class="info-box"><small>KILL</small><b style="color:red">${match.kill} TK</b></div>
+        <div class="info-box"><small>MAP</small><b>${match.map}</b></div>
+        <div class="info-box"><small>POV</small><b>${match.pov}</b></div>
+      </div>
+      <div class="reg-info"><span>👥 Registration</span><span>${match.reg}/${match.total}</span></div>
+      <div class="progress-bar"><div class="progress" style="width:${percent}%"></div></div>
+      <button class="join-btn ${isFull?'gray':'red'}" ${isFull?'disabled':''}>
+        ${isFull?'🚫 Match Full':'🚀 Join Now'}
+      </button>
+      <div class="btn-group">
+        <button class="btn-small">👥 Slots</button>
+        <button class="btn-small">🚪 Room</button>
+        <button class="btn-small">🏆 Prizes</button>
+      </div>
+      <div class="countdown">⏰ Starts in: ${timeLeft}</div>
+    </div>`;
+  });
+  matchListContainer.innerHTML = html;
+}
+
+window.backToHome = () => { matchListPage.classList.add('hidden'); homePage.classList.remove('hidden'); }
+
+function getTimeLeft(targetTime){
+  const diff = new Date(targetTime) - new Date();
+  if(diff<0) return "MATCH STARTED";
+  const h = Math.floor(diff/3600000); const m = Math.floor((diff%3600000)/60000); const s = Math.floor((diff%60000)/1000);
+  return `${h>0?h+' Hour ':''}${m} Minute ${s} Second`;
+}
+
+// SLIDER 4s
+let currentSlide = 0; const slides = document.getElementById('slides'); const totalSlides = slides.children.length;
+const dotsContainer = document.getElementById('dots'); for(let i=0; i<totalSlides; i++){ dotsContainer.innerHTML += `<div class="dot ${i==0?'active':''}"></div>`; }
+const dots = dotsContainer.children;
+function updateSlider(){ slides.style.transform = `translateX(-${currentSlide * 100}%)`; for(let i=0; i<dots.length; i++){ dots[i].classList.remove('active'); } dots[currentSlide].classList.add('active'); }
+setInterval(()=>{ currentSlide = (currentSlide + 1) % totalSlides; updateSlider(); }, 4000);
+setInterval(()=>{ if(!matchListPage.classList.contains('hidden')) openMatchList('Solo'); }, 1000); // Timer update
+</script>
+</body>
+</html>
